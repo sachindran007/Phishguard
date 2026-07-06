@@ -1,0 +1,9 @@
+{
+  "suspicious_tlds": [
+    ".tk", ".ml", ".ga", ".cf", ".gq",
+    ".xyz", ".top", ".click", ".work", ".info",
+    ".online", ".site", ".icu", ".cyou", ".rest",
+    ".buzz", ".club", ".space", ".pw", ".cc",
+    ".su"
+  ]
+}

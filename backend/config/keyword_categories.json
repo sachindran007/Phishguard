@@ -1,0 +1,24 @@
+{
+  "phishing_keywords": [
+    "login", "signin", "sign-in", "log-in",
+    "verify", "verification", "validate",
+    "secure", "security", "safety",
+    "update", "upgrade", "renew",
+    "account", "password", "credential",
+    "confirm", "suspend", "suspended",
+    "alert", "warning", "urgent",
+    "unlock", "restore", "recover",
+    "support", "helpdesk", "service"
+  ],
+  "financial_keywords": [
+    "bank", "banking", "payment", "pay",
+    "wallet", "transfer", "wire",
+    "credit", "debit", "card",
+    "kyc", "aml", "pan", "aadhaar"
+  ],
+  "urgency_keywords": [
+    "urgent", "immediately", "expire",
+    "suspended", "blocked", "limited",
+    "act-now", "deadline", "last-chance"
+  ]
+}

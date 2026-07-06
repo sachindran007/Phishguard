@@ -1,0 +1,8 @@
+{
+  "trusted_tlds": [
+    ".com", ".org", ".net", ".gov", ".edu",
+    ".in", ".gov.in", ".nic.in", ".co.in", ".ac.in",
+    ".co.uk", ".com.au", ".co.jp", ".de", ".fr",
+    ".ca", ".us", ".io", ".dev"
+  ]
+}

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>PhishGuard</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <header>
+    <h1>PhishGuard <span>AI</span></h1>
+  </header>
+
+  <main id="app">
+    <div id="loading" class="hidden">
+      <div class="spinner"></div>
+      <p>Analyzing URL...</p>
+    </div>
+
+    <div id="result" class="hidden">
+      <div id="verdict-banner" class="verdict-banner">
+        <div id="verdict-icon">❓</div>
+        <div>
+          <div class="verdict-label">Threat Assessment</div>
+          <div id="verdict-text" class="verdict-text">Unknown</div>
+        </div>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-box">
+          <div class="stat-value" id="score-text">--/100</div>
+          <div class="stat-label">Risk Score</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-value" id="confidence-text">--%</div>
+          <div class="stat-label">Confidence</div>
+        </div>
+      </div>
+
+      <div id="brand-warning" class="brand-warning hidden">
+        <strong>⚠️ Brand Impersonation</strong><br>
+        Target: <span id="brand-target"></span> (<span id="brand-sim"></span>% match)
+      </div>
+
+      <div class="ai-box">
+        <div class="ai-label">AI Summary</div>
+        <p id="ai-summary"></p>
+      </div>
+      
+      <button id="btn-full-report">View Full Report</button>
+    </div>
+
+    <div id="error" class="hidden">
+      <p id="error-text"></p>
+      <button id="btn-retry">Retry</button>
+    </div>
+  </main>
+
+  <script src="popup.js"></script>
+</body>
+</html>

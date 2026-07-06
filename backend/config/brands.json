@@ -1,0 +1,274 @@
+{
+  "technology": {
+    "google": {
+      "domains": ["google.com", "google.co.in", "google.co.uk", "google.co.jp", "google.com.br", "google.de", "google.fr", "google.ca"],
+      "keywords": ["gmail", "drive", "docs", "play", "cloud", "maps", "translate", "chrome"]
+    },
+    "microsoft": {
+      "domains": ["microsoft.com", "live.com", "outlook.com", "office.com", "office365.com", "azure.com", "bing.com", "skype.com"],
+      "keywords": ["windows", "teams", "onedrive", "xbox", "azure"]
+    },
+    "apple": {
+      "domains": ["apple.com", "icloud.com"],
+      "keywords": ["iphone", "ipad", "macbook", "itunes", "appstore"]
+    },
+    "amazon": {
+      "domains": ["amazon.com", "amazon.co.uk", "amazon.in", "amazon.de", "amazon.co.jp"],
+      "keywords": ["prime", "aws", "kindle", "alexa"]
+    },
+    "meta": {
+      "domains": ["meta.com"],
+      "keywords": ["metaverse", "quest"]
+    },
+    "facebook": {
+      "domains": ["facebook.com", "fb.com"],
+      "keywords": ["messenger"]
+    },
+    "instagram": {
+      "domains": ["instagram.com"],
+      "keywords": ["reels", "stories"]
+    },
+    "whatsapp": {
+      "domains": ["whatsapp.com", "web.whatsapp.com"],
+      "keywords": []
+    },
+    "linkedin": {
+      "domains": ["linkedin.com", "lnkd.in"],
+      "keywords": ["jobs", "recruiter"]
+    },
+    "github": {
+      "domains": ["github.com", "github.io", "github.dev"],
+      "keywords": ["gist", "copilot"]
+    },
+    "adobe": {
+      "domains": ["adobe.com"],
+      "keywords": ["photoshop", "creative", "acrobat"]
+    },
+    "dropbox": {
+      "domains": ["dropbox.com", "dropboxusercontent.com"],
+      "keywords": []
+    },
+    "zoom": {
+      "domains": ["zoom.us"],
+      "keywords": ["meeting", "webinar"]
+    },
+    "netflix": {
+      "domains": ["netflix.com"],
+      "keywords": ["stream", "watch"]
+    },
+    "twitter": {
+      "domains": ["twitter.com", "x.com", "t.co"],
+      "keywords": ["tweet"]
+    },
+    "youtube": {
+      "domains": ["youtube.com", "youtu.be"],
+      "keywords": ["channel", "subscribe"]
+    },
+    "telegram": {
+      "domains": ["telegram.org", "t.me"],
+      "keywords": []
+    },
+    "discord": {
+      "domains": ["discord.com", "discordapp.com", "discord.gg"],
+      "keywords": ["server", "nitro"]
+    },
+    "reddit": {
+      "domains": ["reddit.com"],
+      "keywords": ["subreddit"]
+    },
+    "slack": {
+      "domains": ["slack.com"],
+      "keywords": ["workspace"]
+    },
+    "spotify": {
+      "domains": ["spotify.com", "open.spotify.com"],
+      "keywords": ["playlist", "premium"]
+    }
+  },
+  "indian_technology": {
+    "flipkart": {
+      "domains": ["flipkart.com"],
+      "keywords": ["seller", "supermart"]
+    },
+    "myntra": {
+      "domains": ["myntra.com"],
+      "keywords": ["fashion"]
+    },
+    "swiggy": {
+      "domains": ["swiggy.com"],
+      "keywords": ["instamart", "food"]
+    },
+    "zomato": {
+      "domains": ["zomato.com"],
+      "keywords": ["restaurant", "food"]
+    },
+    "ola": {
+      "domains": ["olacabs.com"],
+      "keywords": ["ride", "cab"]
+    }
+  },
+  "government": {
+    "uidai": {
+      "domains": ["uidai.gov.in"],
+      "keywords": ["aadhaar", "uid", "enrolment"]
+    },
+    "aadhaar": {
+      "domains": ["uidai.gov.in"],
+      "keywords": ["uid", "enrolment", "ekyc"]
+    },
+    "digilocker": {
+      "domains": ["digilocker.gov.in"],
+      "keywords": ["document", "certificate"]
+    },
+    "gstn": {
+      "domains": ["gst.gov.in"],
+      "keywords": ["gst", "return", "invoice"]
+    },
+    "incometax": {
+      "domains": ["incometax.gov.in", "incometaxindiaefiling.gov.in"],
+      "keywords": ["itr", "refund", "pan", "efiling"]
+    },
+    "epfo": {
+      "domains": ["epfindia.gov.in", "epfigms.gov.in"],
+      "keywords": ["pf", "provident", "uan", "passbook"]
+    },
+    "cowin": {
+      "domains": ["cowin.gov.in"],
+      "keywords": ["vaccine", "covid", "dose"]
+    },
+    "irctc": {
+      "domains": ["irctc.co.in"],
+      "keywords": ["train", "ticket", "railway", "booking"]
+    }
+  },
+  "payment": {
+    "paypal": {
+      "domains": ["paypal.com", "paypal.me"],
+      "keywords": ["checkout", "invoice"]
+    },
+    "googlepay": {
+      "domains": ["pay.google.com"],
+      "keywords": ["gpay", "upi"]
+    },
+    "phonepe": {
+      "domains": ["phonepe.com"],
+      "keywords": ["upi", "recharge"]
+    },
+    "paytm": {
+      "domains": ["paytm.com"],
+      "keywords": ["wallet", "upi", "recharge"]
+    },
+    "bhimupi": {
+      "domains": ["bhimupi.org.in"],
+      "keywords": ["upi", "bhim"]
+    }
+  },
+  "banking": {
+    "sbi": {
+      "domains": ["sbi.co.in", "onlinesbi.sbi"],
+      "keywords": ["yono", "netbanking", "account"]
+    },
+    "hdfcbank": {
+      "domains": ["hdfcbank.com"],
+      "keywords": ["netbanking", "creditcard", "loan"]
+    },
+    "icicibank": {
+      "domains": ["icicibank.com"],
+      "keywords": ["imobile", "netbanking"]
+    },
+    "axisbank": {
+      "domains": ["axisbank.com"],
+      "keywords": ["netbanking", "loan"]
+    },
+    "kotakbank": {
+      "domains": ["kotak.com"],
+      "keywords": ["netbanking", "811"]
+    },
+    "pnb": {
+      "domains": ["pnbindia.in"],
+      "keywords": ["netbanking"]
+    },
+    "bankofbaroda": {
+      "domains": ["bankofbaroda.in"],
+      "keywords": ["netbanking"]
+    },
+    "canarabank": {
+      "domains": ["canarabank.com"],
+      "keywords": ["netbanking"]
+    },
+    "unionbank": {
+      "domains": ["unionbankofindia.co.in"],
+      "keywords": ["netbanking"]
+    },
+    "idbibank": {
+      "domains": ["idbibank.in"],
+      "keywords": ["netbanking"]
+    },
+    "yesbank": {
+      "domains": ["yesbank.in"],
+      "keywords": ["netbanking"]
+    },
+    "rbi": {
+      "domains": ["rbi.org.in"],
+      "keywords": ["monetary", "policy", "regulation"]
+    },
+    "bankofamerica": {
+      "domains": ["bankofamerica.com"],
+      "keywords": ["merrill", "erica"]
+    },
+    "chase": {
+      "domains": ["chase.com", "jpmorgan.com"],
+      "keywords": ["sapphire", "freedom"]
+    },
+    "wellsfargo": {
+      "domains": ["wellsfargo.com"],
+      "keywords": ["banking"]
+    },
+    "citibank": {
+      "domains": ["citibank.com", "citi.com"],
+      "keywords": ["rewards"]
+    },
+    "hsbc": {
+      "domains": ["hsbc.com"],
+      "keywords": ["premier"]
+    }
+  },
+  "ecommerce": {
+    "ebay": {
+      "domains": ["ebay.com", "ebay.co.uk"],
+      "keywords": ["auction", "bid"]
+    },
+    "steam": {
+      "domains": ["steampowered.com", "steamcommunity.com"],
+      "keywords": ["game", "store"]
+    }
+  },
+  "crypto": {
+    "coinbase": {
+      "domains": ["coinbase.com"],
+      "keywords": ["wallet", "exchange"]
+    },
+    "binance": {
+      "domains": ["binance.com"],
+      "keywords": ["exchange", "bnb"]
+    },
+    "kraken": {
+      "domains": ["kraken.com"],
+      "keywords": ["exchange"]
+    }
+  },
+  "email": {
+    "gmail": {
+      "domains": ["gmail.com", "mail.google.com"],
+      "keywords": ["inbox"]
+    },
+    "yahoo": {
+      "domains": ["yahoo.com", "mail.yahoo.com"],
+      "keywords": ["mail"]
+    },
+    "outlook": {
+      "domains": ["outlook.com", "outlook.live.com"],
+      "keywords": ["hotmail"]
+    }
+  }
+}

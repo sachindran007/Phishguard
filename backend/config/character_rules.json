@@ -1,0 +1,24 @@
+{
+  "single_char_substitutions": {
+    "0": "o",
+    "1": "l",
+    "3": "e",
+    "4": "a",
+    "5": "s",
+    "6": "g",
+    "7": "t",
+    "8": "b",
+    "@": "a",
+    "!": "i",
+    "$": "s",
+    "I": "l",
+    "O": "o"
+  },
+  "multi_char_substitutions": {
+    "rn": "m",
+    "vv": "w",
+    "cl": "d",
+    "nn": "m"
+  },
+  "description": "Maps visually similar characters used in typosquatting and homoglyph attacks back to their intended ASCII form."
+}

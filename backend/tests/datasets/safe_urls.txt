@@ -1,0 +1,10 @@
+https://google.com
+https://github.com
+https://en.wikipedia.org/wiki/Main_Page
+https://www.apple.com/mac/
+https://www.microsoft.com/en-us/
+https://aws.amazon.com/
+https://stackoverflow.com/questions/
+https://www.netflix.com/
+https://twitter.com/
+https://www.linkedin.com/
