@@ -316,68 +316,159 @@ def check_url_structure(url: str, hostname: str) -> dict:
     """Feature 8 – Advanced URL structure anomaly analysis."""
     issues = []
 
-    # IP address as hostname
+    # ── URL Shorteners ────────────────────────────────────────────────────
+    _SHORTENERS = {
+        "bit.ly", "tinyurl.com", "t.co", "shorturl.at", "goo.gl",
+        "is.gd", "v.gd", "cutt.ly", "rb.gy", "tiny.cc", "ow.ly",
+    }
+    if any(hostname == s or hostname.endswith("." + s) for s in _SHORTENERS):
+        issues.append("URL shortener detected (hides real destination)")
+
+    # ── IP address as hostname ────────────────────────────────────────────
     if is_ip_address(hostname):
         issues.append("IP address used instead of domain name")
 
-    # Too many subdomains
+    # ── Excessive subdomains ──────────────────────────────────────────────
     sub_count = count_subdomains(hostname)
     if sub_count > 3:
-        issues.append(f"Excessive subdomains ({sub_count})")
+        issues.append(f"Excessive subdomains ({sub_count}) — common obfuscation")
 
-    # Multiple hyphens (common in typosquatting / evasion)
+    # ── Multiple hyphens ──────────────────────────────────────────────────
     hyphen_count = hostname.count("-")
     if hyphen_count >= 3:
-        issues.append(f"Multiple hyphens in domain ({hyphen_count})")
+        issues.append(f"Multiple hyphens in domain ({hyphen_count}) — phishing pattern")
+    elif hyphen_count >= 2:
+        issues.append(f"Hyphens in domain ({hyphen_count}) — slightly suspicious")
 
-    # Excessive numbers in domain
-    num_count = sum(c.isdigit() for c in hostname)
-    if num_count >= 5:
-        issues.append(f"Excessive numbers in domain ({num_count})")
-
-    # High entropy (random character domains)
+    # ── Excessive numbers in domain ───────────────────────────────────────
     domain_label = hostname.split(".")[0] if "." in hostname else hostname
-    if _calculate_entropy(domain_label) > 3.8 and len(domain_label) > 8:
-        issues.append("Random/gibberish domain name detected")
+    num_count = sum(c.isdigit() for c in domain_label)
+    if num_count >= 5:
+        issues.append(f"Excessive numbers in domain ({num_count}) — obfuscation tactic")
+    elif num_count >= 3 and len(domain_label) < 12:
+        issues.append(f"High digit ratio in domain ({num_count}/{len(domain_label)} chars)")
 
-    # Suspicious TLDs
-    suspicious_tlds = {".xyz", ".top", ".tk", ".ml", ".ga", ".cf", ".gq", ".pw", ".cc", ".su"}
-    for tld in suspicious_tlds:
-        if hostname.endswith(tld):
+    # ── Random/gibberish domain (entropy) ─────────────────────────────────
+    entropy = _calculate_entropy(domain_label)
+    if entropy > 3.8 and len(domain_label) > 8:
+        issues.append(f"Random/gibberish domain name detected (entropy={entropy:.1f})")
+    elif entropy > 3.5 and len(domain_label) > 10:
+        issues.append(f"High entropy domain name (entropy={entropy:.1f})")
+
+    # ── Suspicious TLDs ───────────────────────────────────────────────────
+    _SUSPICIOUS_TLDS = {
+        ".xyz", ".top", ".click", ".work", ".info", ".online", ".site",
+        ".icu", ".cyou", ".rest", ".buzz", ".tk", ".ml", ".ga", ".cf",
+        ".gq", ".pw", ".cc", ".su", ".club", ".space",
+    }
+    host_lower = hostname.lower()
+    for tld in _SUSPICIOUS_TLDS:
+        if host_lower.endswith(tld):
             issues.append(f"Suspicious TLD ({tld})")
             break
 
-    # Special / encoded characters tricks
-    if "%" in url:
-        issues.append("URL-encoded characters detected")
-    if url.count("@") > 0:
+    # ── Encoded characters ────────────────────────────────────────────────
+    encoded_chars = re.findall(r"%[0-9A-Fa-f]{2}", url)
+    if encoded_chars:
+        unique = list(set(encoded_chars[:5]))
+        issues.append(f"URL-encoded characters detected ({', '.join(unique)})")
+
+    # ── Credential syntax (@) ─────────────────────────────────────────────
+    if "@" in url.split("//", 1)[-1].split("/", 1)[0]:
         issues.append("Credential syntax (@) used to obfuscate domain")
 
-    # Port in URL
+    # ── Non-standard port ─────────────────────────────────────────────────
     parsed = urlparse(url)
     if parsed.port and parsed.port not in (80, 443):
         issues.append(f"Non-standard port ({parsed.port})")
 
-    # Punycode / IDN homograph
+    # ── Punycode / IDN homograph ──────────────────────────────────────────
     if "xn--" in hostname:
         issues.append("Punycode / IDN domain (possible homograph attack)")
 
-    # Double extension tricks
+    # ── Double extension tricks ───────────────────────────────────────────
     if re.search(r'\.(exe|php|zip|js|html)\.(com|net|org|io)', hostname):
         issues.append("Double extension in hostname")
 
+    # ── Suspicious keyword categories ─────────────────────────────────────
+    url_lower = url.lower()
+
+    _AUTH_KEYWORDS = [
+        "login", "signin", "sign-in", "log-in", "verify",
+        "authenticate", "password", "otp", "credential",
+    ]
+    _FINANCIAL_KEYWORDS = [
+        "bank", "kyc", "payment", "wallet", "refund", "upi",
+        "transfer", "credit", "debit",
+    ]
+    _URGENCY_KEYWORDS = [
+        "urgent", "security", "limited", "alert", "expire",
+        "update", "suspend", "blocked", "immediately",
+    ]
+
+    auth_found = [kw for kw in _AUTH_KEYWORDS if kw in url_lower]
+    fin_found  = [kw for kw in _FINANCIAL_KEYWORDS if kw in url_lower]
+    urg_found  = [kw for kw in _URGENCY_KEYWORDS if kw in url_lower]
+
+    if auth_found:
+        issues.append(f"Authentication keywords: {', '.join(auth_found)}")
+    if fin_found:
+        issues.append(f"Financial keywords: {', '.join(fin_found)}")
+    if urg_found:
+        issues.append(f"Urgency keywords: {', '.join(urg_found)}")
+
+    # ── Risk points calculation ───────────────────────────────────────────
+    risk_points = 0
+    for issue in issues:
+        if "shortener" in issue.lower():
+            risk_points += 15
+        elif "IP address" in issue:
+            risk_points += 15
+        elif "Excessive subdomains" in issue:
+            risk_points += 10
+        elif "Multiple hyphens" in issue:
+            risk_points += 10
+        elif "Excessive numbers" in issue or "digit ratio" in issue:
+            risk_points += 10
+        elif "Random/gibberish" in issue or "entropy" in issue:
+            risk_points += 15
+        elif "Suspicious TLD" in issue:
+            risk_points += 15
+        elif "Punycode" in issue:
+            risk_points += 20
+        elif "encoded" in issue.lower():
+            risk_points += 10
+        elif "Authentication keywords" in issue:
+            risk_points += 10
+        elif "Financial keywords" in issue:
+            risk_points += 10
+        elif "Urgency keywords" in issue:
+            risk_points += 10
+        else:
+            risk_points += 5
+
+    # Cap at 50 to not overwhelm other signals
+    risk_points = min(risk_points, 50)
+
     if issues:
+        status = "Suspicious" if risk_points >= 20 else "Mildly Suspicious"
         return {
             "name":    "URL Structure",
             "value":   f"Suspicious Structure ⚠",
-            "explain": "Multiple phishing naming patterns detected: " + "; ".join(issues) + ".",
+            "explain": "Structural anomalies detected: " + "; ".join(issues) + ".",
             "issues":  issues,
+            "structure_status": status,
+            "risk_added": risk_points,
+            "detected_patterns": issues,
         }
     return {
         "name":    "URL Structure",
         "value":   "Structure Looks Normal ✓",
         "explain": "No unusual structural patterns detected in the URL.",
         "issues":  [],
+        "structure_status": "Normal",
+        "risk_added": 0,
+        "detected_patterns": [],
     }
 
 
