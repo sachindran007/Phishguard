@@ -22,7 +22,8 @@ import RecommendationPanel from './components/RecommendationPanel.jsx'
 import BrandWarningBanner  from './components/BrandWarningBanner.jsx'
 import VisualScanPanel     from './components/VisualScanPanel.jsx'
 
-const API_ENDPOINT = '/api/analyze'
+const API_URL = import.meta.env.VITE_API_URL || ''
+const API_ENDPOINT = `${API_URL}/api/analyze`
 
 const STAT_PILLS = [
   { icon: '🔬', label: '11 Security Checks' },
@@ -37,7 +38,7 @@ function extractErrorMessage(err) {
     return d?.error ?? `Server error: HTTP ${err.response.status}`
   }
   if (err.request) {
-    return 'Could not reach the backend server. Make sure Flask is running on port 5000.'
+    return 'Could not reach the backend server. Please try again later.'
   }
   return err.message || 'An unexpected error occurred.'
 }

@@ -212,7 +212,9 @@ VIRUSTOTAL_API_KEY=your_virustotal_key
 
 ```bash
 flask run
-# → Running on http://localhost:5000
+#Running on https://phishguard-backend-uc0n.onrender.com
+or 
+#Running on http://localhost:5173
 ```
 
 ---

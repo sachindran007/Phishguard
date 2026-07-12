@@ -1,10 +1,20 @@
-const API_URL = 'http://localhost:5000/api/analyze';
+/**
+ * popup.js — PhishGuard Browser Extension
+ * Popup UI logic: scans the current tab URL on open.
+ *
+ * API URL is hardcoded because browser extensions don't use Vite bundling.
+ * Change this if your backend URL changes.
+ */
+
+const API_URL = 'https://phishguard-backend-uc0n.onrender.com/api/analyze';
+const FRONTEND_URL = 'https://phishguard-frontend.onrender.com';
+
 
 document.addEventListener('DOMContentLoaded', async () => {
   const elLoading = document.getElementById('loading');
-  const elResult  = document.getElementById('result');
-  const elError   = document.getElementById('error');
-  
+  const elResult = document.getElementById('result');
+  const elError = document.getElementById('error');
+
   try {
     const tabs = await chrome.tabs.query({ active: true, currentWindow: true });
     const currentUrl = tabs[0]?.url;
@@ -33,9 +43,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // Populate UI
     const banner = document.getElementById('verdict-banner');
-    const icon   = document.getElementById('verdict-icon');
-    const text   = document.getElementById('verdict-text');
-    
+    const icon = document.getElementById('verdict-icon');
+    const text = document.getElementById('verdict-text');
+
     text.textContent = data.verdict;
     document.getElementById('score-text').textContent = `${data.risk_score}/100`;
     document.getElementById('confidence-text').textContent = `${data.confidence}%`;
@@ -70,7 +80,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   });
 
   document.getElementById('btn-full-report').addEventListener('click', () => {
-    // Open localhost frontend in new tab
-    chrome.tabs.create({ url: 'http://localhost:5173' });
+    // Open full PhishGuard web app
+    chrome.tabs.create({ url: FRONTEND_URL });
   });
 });
